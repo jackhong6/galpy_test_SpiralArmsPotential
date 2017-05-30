@@ -8,12 +8,13 @@ import unittest
 class TestSpiralArmsPotential(unittest.TestCase):
 
     def test_Rforce(self):
-        dx = 1e-6
+        dx = 1e-8
         rtol = 0.0001  # relative tolerance = 0.01%
 
         pot = spiral.SpiralArmsPotential()
         assert_allclose(pot.Rforce(1., 0.), -deriv(lambda x: pot(x, 0.), 1., dx=dx), rtol=rtol)
-        assert_allclose(pot.Rforce(0.01, 0.), -deriv(lambda x: pot(x, 0.), 0.01, dx=dx), rtol=rtol)
+        #assert_allclose(pot.Rforce(0., 0.), -deriv(lambda x: pot(x, 0.), 0., dx=dx), rtol=rtol)     # R=0 does not work
+        assert_allclose(pot.Rforce(0.01, 0.), -deriv(lambda x: pot(x, 0.), 0.01, dx=dx), rtol=rtol) # but R=0.01 does
         R, z = 0.3, 0
         assert_allclose(pot.Rforce(R, z, 0),      -deriv(lambda x: pot(x, z, 0),      R, dx=dx), rtol=rtol)
         assert_allclose(pot.Rforce(R, z, pi/2),   -deriv(lambda x: pot(x, z, pi/2),   R, dx=dx), rtol=rtol)
