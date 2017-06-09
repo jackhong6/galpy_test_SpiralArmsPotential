@@ -107,28 +107,6 @@ class TestSpiralArmsPotentialHelpers(unittest.TestCase):
         assert_allclose(pot._dgamma_dR(3), deriv(lambda x: pot._gamma(x, 1, 2), 3, dx=dx))
         assert_allclose(pot._dgamma_dR(0.01), deriv(lambda x: pot._gamma(x, 1, 2), 0.01, dx=dx))
 
-    def test_dgamma2_dR(self):
-        dx = 1e-8
-        R, phi, t = 1., 2., 3.
-        assert_allclose(pot._dgamma2_dR(R, phi, t), deriv(lambda x: pot._gamma(x, phi, t) ** 2, R, dx=dx))
-        R, phi, t = 1, 2, 3
-        assert_allclose(pot._dgamma2_dR(R, phi, t), deriv(lambda x: pot._gamma(x, phi, t) ** 2, R, dx=dx))
-        R, phi, t = 1e-2, 0, 0
-        assert_allclose(pot._dgamma2_dR(R, phi, t), deriv(lambda x: pot._gamma(x, phi, t) ** 2, R, dx=dx))
-        R, phi, t = 4, -.5, -.7
-        assert_allclose(pot._dgamma2_dR(R, phi, t), deriv(lambda x: pot._gamma(x, phi, t) ** 2, R, dx=dx))
-
-    def test_dgamma2_dphi(self):
-        dx = 1e-8
-        R, phi, t = 1., 2., 3.
-        assert_allclose(pot._dgamma2_dphi(R, phi, t), deriv(lambda x: pot._gamma(R, x, t) ** 2, phi, dx=dx))
-        R, phi, t = 1, 2, 3
-        assert_allclose(pot._dgamma2_dphi(R, phi, t), deriv(lambda x: pot._gamma(R, x, t) ** 2, phi, dx=dx))
-        R, phi, t = 11, 0, 0
-        assert_allclose(pot._dgamma2_dphi(R, phi, t), deriv(lambda x: pot._gamma(R, x, t) ** 2, phi, dx=dx))
-        R, phi, t = 5, -.1, -.5
-        assert_allclose(pot._dgamma2_dphi(R, phi, t), deriv(lambda x: pot._gamma(R, x, t) ** 2, phi, dx=dx))
-
     def test_d2gamma_dR2(self):
         dx = 1e-8
         assert_allclose(pot._d2gamma_dR2(1), deriv(pot._dgamma_dR, 1, dx=dx))
