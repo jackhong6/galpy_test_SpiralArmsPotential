@@ -602,7 +602,7 @@ class TestSpiralArmsPotential(unittest.TestCase):
     def test_Rphideriv(self):
         """Test Rphideriv against a numerical derivative."""
         dx = 1e-8
-        rtol = 1e-6
+        rtol = 5e-5
 
         pot = spiral()
         R, z, phi, t = 1, 0, 0, 0
@@ -626,6 +626,32 @@ class TestSpiralArmsPotential(unittest.TestCase):
         R, z, phi, t = .01, 0, 0, 0
         assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
         R, z, phi, t = 1.23, 0, 44, 343
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 7, 7, 7, 7
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+
+        pot = spiral(N=3, alpha=.21, r_ref=.5, phi_ref=pi, Cs=[2.], omega=-3)
+        R, z, phi, t = 1, 0, 0, 0
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 0.7, 0.3, pi / 3, 0
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 1.1, -0.3, pi / 4.2, 3
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = .777, .747, .343, 2.5
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 12, 1, 2, 3
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 3, 4, 5, 6
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 5, -.7, 3 * pi / 2, 5
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 11, 11, 11, 1.123
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 3, 2, 1, 100
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = .01, 0, 0, 0
+        assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
+        R, z, phi, t = 1.12, 0, 2, 343
         assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
         R, z, phi, t = 7, 7, 7, 7
         assert_allclose(pot.Rphideriv(R, z, phi, t), -deriv(lambda x: pot.Rforce(R, z, x, t), phi, dx=dx), rtol=rtol)
