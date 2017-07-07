@@ -1,0 +1,5 @@
+{
+  "test_SpiralArmsPotential.py::TestSpiralArmsPotential::test_dens": true, 
+  "test_SpiralArmsPotential.py::TestSpiralArmsPotential::test_phi2deriv": true, 
+  "test_SpiralArmsPotential.py::TestSpiralArmsPotential::test_z2deriv": true
+}
